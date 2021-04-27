@@ -1,0 +1,46 @@
+# Se indica la versión de docker-compose
+version: '3.8'
+
+# Se agregan los servicios, en este caso será nuestra app django y la base de datos
+services:
+  # Servicio que ejecuta la django app
+  web:
+    build:
+      # Se indica el contexto (este directorio)
+      context: .
+      # Se indica el Dockerfile
+      dockerfile: Dockerfile
+    
+    # Se indican los puertos
+    ports:
+      # Puerto Dockerfile : puerto local
+      - 8000:8000
+    volumes:
+      # Se agrega para enlazar los archivos de este directorio con los archivos del contenedor
+      - .:/app
+      # Se indica que este servicio depende en el servicio db para funcionar
+    depends_on:
+      - db
+  
+  # Se añade el servicio de la base de datos
+  db:
+    # Se añade la imagen de mysql
+    image: mysql:5.7.22
+    # Se añade esta línea para asegurarnos que siempre que se inicie Docker,
+    # esté disponible la base de datos
+    restart: always
+    # Añadimos variables de entorno para mysql
+    environment:
+      MYSQL_DATABASE: myshop
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      # Se agrega para enlazar los archivos de la db con los archivos del contenedor
+      - .docker/setup.sql:/docker-entrypoint-initdb.d/setup.sql
+      - .dbdata:/var/lib/mysql
+    # Se indican los puertos
+    ports:
+      # Puerto fuera del contenedor : puerto del contenedor
+      # Se indica 33066 para que no tenga conflicto con alguna instalación local de mysql
+      - 33066:3306

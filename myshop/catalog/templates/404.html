@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}My shop{% endblock %}</title>
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+</head>
+<body>
+
+    <div id="subheader">
+
+        <div style="float:left; margin:0px;">
+            <a href="/shop/"><h2>My shop</h2></a>
+        </div>
+        
+        <div class="cart" style="float:right; margin-right:10px; margin-top: 20px;">
+            {% with total_items=cart|length %}
+                {% if total_items > 0 %}
+                    Your cart: 
+                    <a href="{% url "cart_detail" %}">
+                        {{ total_items }} item{{ total_items|pluralize }}, ${{ cart.get_total_price }}
+                    </a>
+                {% else %}
+                    Your cart is empty.
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <div style="float:right; margin-right:5px; margin-top: 20px;">
+            <img class="logo" width="30px" src="{% static "img/cart.png" %}">
+        </div>
+
+        <div class="cart" style="float:right; margin-right:30px; margin-top: 20px;">
+            <a href="">Cancel order</a>
+        </div>
+
+    </div>
+    <div id="content">
+
+        <div class="div-centrado">
+            <div class="form-row">
+                <p class="texto-404-title">Error 404</p>
+            </div>
+        </div>
+        <div class="div-centrado">
+            <div class="form-row">
+                <p class="texto-404-error">Upps... Algo salió mal.</p>
+            </div>
+        </div>
+        <div class="div-centrado">
+            <div class="form-row">
+                <p class="texto-404-error">Bad Request</p>
+            </div>
+        </div>
+        <div class="div-centrado">    
+            <div class="form-row">
+                <a href="/shop/">Regresar a la página principal</a>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
