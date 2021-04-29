@@ -11,7 +11,7 @@ MyShop es una tienda online que permite a los clientes navegar a través de un c
 
 A continuación se muestra una vista estática del diseño del sistema MyShop:
 
-![Vista estática del sistema MyShop](docs/diagrama_componentes.png)
+![Vista estática del sistema MyShop](docs/diagrama_componentes.jpg)
 
 ## Prerrequisitos
 - Clonar el repositorio:
@@ -373,9 +373,10 @@ Nota: Recordar que en este caso estamos probando el sistema sin la ayuda del con
 
 ## Versión
 
-1.0.0 - Marzo 2021
+1.1.0 - Abril 2021
 
 ## Autores
 
 * **Perla Velasco**
 * **Jorge Alfonso Solís**
+* **ASD Equipo 4**
